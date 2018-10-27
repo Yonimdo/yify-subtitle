@@ -10,9 +10,7 @@ from shutil import copyfile, rmtree
 import requests
 from html2text import HTML2Text
 
-BASE_DIR = "subs/".format(os.getcwd())
-BASE_URL = 'http://www.yifysubtitles.com'
-SUB_RE = r'(\d+)\| (\w+)\|[^/]+([^)]+)\)'
+from .config import BASE_URL, SUB_RE, BASE_DIR
 
 
 def get(url):
@@ -204,14 +202,3 @@ def get_subtitle(url, destination, target):
             #         pass
             rmtree(folder, ignore_errors=True)
         return data
-
-
-def main():
-    try:
-        search_subtitles(sys.argv[1], int(sys.argv[2]))
-    except IndexError:
-        sys.exit('Usage: yify <movie> <limit> ')
-
-
-if __name__ == '__main__':
-    main()
